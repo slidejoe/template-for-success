@@ -1,0 +1,17 @@
+{
+  "name": "my-umbraco-backoffice-extensions",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "watch": "tsc && vite build --watch",
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.7.1",
+    "@umbraco-cms/backoffice": "^*",
+    "luxon": "^*",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9"
+  }
+}

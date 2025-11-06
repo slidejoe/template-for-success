@@ -1,0 +1,15 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.RichTextBlockItem<ContentModels.PhoneNumberRteBlock>>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using System.Text.RegularExpressions
+@{
+	var contactPage = Model.Content.ContactUsPage as ContentModels.Contact;
+
+	if(contactPage is null || string.IsNullOrWhiteSpace(contactPage.PhoneNumber))
+	{
+		return;
+	}
+}
+
+<a href="tel:@contactPage.PhoneNumber.Replace(" ", "")">
+	@Regex.Replace(contactPage.PhoneNumber, @"\+44\s*", "0")
+</a>
