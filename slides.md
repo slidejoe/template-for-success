@@ -1069,5 +1069,6 @@ name: Thank you
 
 - <solar-global-bold-duotone /> https://joe.gl/ombek
 - <solar-presentation-graph-bold-duotone /> https://slides.joe.gl/template-for-success
+- <solar-chat-square-code-bold-duotone/> https://notacu.lt/slides/template/samples
 
 ---
