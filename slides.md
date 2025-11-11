@@ -1,7 +1,7 @@
 ---
 theme: rockdove
 # some information about your slides (markdown enabled)
-title: 'v17 Editor experience: A \{$template\} for success'
+title: 'v17 Editor experience: A $\{template\} for success'
 info: |
   Editor experience isn’t just a nice-to-have — it’s what makes or breaks your build. With the arrival of the first LTS using the new backoffice, we're seeing fresh possibilities to shape more intuitive and delightful editing environments. But with great innovation (hello Bellissima!) comes the loss of old comforts (farewell AngularJS).
 
