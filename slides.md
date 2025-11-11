@@ -1063,7 +1063,7 @@ name: Thank you
 
 - <logos-mastodon-icon /> [@joe@umbraco&#8239;community.social](https://umbracocommunity.social/joe)
 - <logos-bluesky /> [@joe.gl](https://bsky.app/profile/joe.gl)
-- <logos-linkedin-icon /> https://www.linkedin.com/in/glombek/
+- <logos-linkedin-icon /> https://linkedin.com/in/glombek/
 
 <br/>
 
