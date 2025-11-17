@@ -32,6 +32,14 @@ addons:
 # v17 Editor experience:<br /> <v-click hide>`A ${template} for success`</v-click><span v-click="[1,2]" class="loading"><solar-traffic-line-duotone class="animate-spin" /> Compiling template...</span><v-click at="2">A template for success</v-click>
 
 
+<!--
+ - Practical non-contrived examples
+ - things that have changed in recent versions
+
+ - That's embarrassing, talking about templates but my templates didn't compile! [Click][Click]
+ - Fixed it!
+-->
+
 ---
 layout: bio
 image: /images/Unicorn-transparent.png
@@ -46,6 +54,10 @@ tagline: Senior Developer at Bump Digital
 - <logos-mastodon-icon /> [@joe@umbraco&#8239;community.social](https://umbracocommunity.social/joe)
 - <logos-bluesky />  [@joe.gl](https://bsky.app/profile/joe.gl)
 
+<!--
+ - AngularJS cheat sheet is _still_ one of my most popular blog posts
+-->
+
 ---
 layout: quote
 ---
@@ -59,7 +71,7 @@ layout: quote
       font-family: "Gamja Flower", cursive;
       color: var(--color-mandarin);
       overflow: visible;
-      
+
   white-space: nowrap;
   }
   ins::after {
@@ -78,6 +90,18 @@ We don't really like <v-click><ins>the way our last agency built</ins></v-click>
 ::cite::
 Prospective clients?
 
+<!--
+Have heard this sort of thing in the past
+
+but what they really mean is[click] they don't like the way their last agency built Umbraco.
+
+This is what's at stake
+
+and why it matters that we consider backoffice UX
+
+but...
+-->
+
 ---
 layout: quote
 ---
@@ -86,6 +110,14 @@ I don't get the new Umbraco backoffice
 
 ::cite::
 Me, until very recently
+
+<!--
+...with all the recent changes
+
+not sure how to do it!
+
+Today we're going to look at some features that have changed in recent releases.
+-->
 
 ---
 layout: icons-header
@@ -103,6 +135,34 @@ Useful to explain a property when a name won't do it.
 - <simple-icons-umbraco /> UUI!
 
 </v-clicks>
+
+<!--
+
+I'm sure you're already aware of property descriptions!
+
+Useful to explain a property when a name doesn't give enough detail.
+
+[Click]
+
+Have been Markdown for a long time
+
+Although allowed features have changed
+
+But because it's markdown, we can use...
+
+[Click]
+
+HTML!
+
+And because it's HTML, we can also use
+
+[Click]
+
+web components, like UUI.
+
+
+
+-->
 
 ---
 layout: two-cols-header
@@ -141,6 +201,17 @@ We have to use the native HTML `details` element for modern Umbraco.
 </details>
 ```
 
+<!--
+One of the features that's changed in recent versions is the "read more" functionality.
+
+In earlier versions of Umbraco, `---` rendered a read more link.
+
+This is no longer the case, `---` renders a horizontal rule element (as it should!)
+
+But we can recreate the read more functionality with modern HTML.
+
+We can even take that a step further...
+-->
 
 ---
 layout: center
@@ -158,11 +229,28 @@ This sets the *index* aspect of the [`robots` meta tag](https://developer.mozill
 </details>
 ```
 
+<!--
+
+  We can even take that a step further... in this example
+  [Click]
+
+  - Markdown [Click]
+  - HTML to render a `<details>` element to recreate the read more functionality[Click]
+  - Because IIU uses web components, which are HTML, we can bring UUI elements into the descriptions too.
+  - UUI to render the Umbraco help icon
+
+Which means we can turn this...
+-->
+
 ---
 layout: image
 image: /images/prop-a.png
 backgroundSize: auto
 ---
+
+<!--
+Which means we can turn this... basic description into...
+-->
 
 ---
 layout: image
@@ -170,12 +258,36 @@ image: /images/prop-description.apng
 backgroundSize: contain
 ---
 
+<!--
+This much richer and detailed description with an expanding section with hyperlinks for those who require additional help.
+-->
+
 ---
 
 ## <solar-full-screen-square-bold-duotone/> RTE Blocks
 
+<v-click>
+
 ![](/images/rte-toolbar-settings.png){style="height:200px"}
 ![](/images/rte-blocks-settings.png){style="height:200px"}
+
+</v-click>
+
+<!--
+Another feature new to recent Umbraco versions is rich text editor blocks.
+
+Work just like blocks in block list and block grid.
+
+[Click]
+
+To configure element types for use in the RTE, we need to:
+- add the blocks toolbar button
+- configure the blocks, just like other block editors
+  - can have settings and content
+  - rendered inline or as a block.
+
+The main difference is in how the blocks are rendered...
+-->
 
 ---
 
@@ -199,11 +311,31 @@ backgroundSize: contain
 </a>
 ```
 
+<!--
+  Simply needs a view matching the alias in the Views\Partials\RichText\Components folder
+
+  In this example I'm rendering a phone number from the selected contact page
+  Applying all the logic I want to format the phone number
+  And adding the `tel:` link
+
+The journey for adding this block via the backoffice looks like this:
+
+-->
+
 ---
 layout: image
 image: /images/rte-block.apng
 backgroundSize: contain
 ---
+
+<!--
+- Click the insert block button
+- Pick my phone number block
+- Complete the content for the block, a content picker for the contact page in my case
+- Save
+- And a placeholder appears inline in the RTE
+
+-->
 
 ---
 layout: image
@@ -211,11 +343,20 @@ image: /images/rte-blocks-rendered.png
 backgroundSize: contain
 ---
 
+<!-- 
+ Which renders like this on the frontend.
+-->
+
 ---
 layout: image
 image: /images/blocks-no-templates.png
 backgroundSize: contain
 ---
+
+<!-- All blocks, including those inline in the RTE or, as shown here, in the block list will by default the name of the block
+
+Which is not the most helpful if you're trying to find a specific block in a list of 5 of the same type...
+ -->
 
 ---
 
@@ -226,6 +367,20 @@ We used to be able to achieve this using [AngularJS templates](https://joe.gl/om
 `Call to Action: {{ page | ncNodeName }}`
 
 `Text module: {{ bodyText.markup | ncRichText | truncate:true:35 }}`
+
+<!--
+We used to be able customise this by providing label templates for our blocks using AngularJS templates
+
+(for which I wrote a cheat sheet!)
+
+We could do things like these
+
+Rendering the name of a page using the `ncNodeName` filter
+
+Or strip markup from an RTE, and truncate it to fit the label.
+
+But with the removal of AngularJS, came the removal of AngualarJS templates...
+-->
 
 ---
 layout: icons-header
@@ -248,43 +403,95 @@ There are several syntaxes for using UFM:
   `| filterAlias:parameters`
   appended to components _or_ expressions
 
+<!--
+So we've been presented with UFM - Umbraco Flavored Markdown
+
+
+(Although the "Markdown" bit is largely irrelevant for labels!
+But UFM is what's used in property descriptions too!)
+
+UFM has 3 syntaxes useful for label templates:
+- Components
+- Expressions
+- Filters
+
+Let's explore each of these...
+-->
+
 ---
 
 #### <solar-circle-top-up-bold-duotone /> UFM Components
 
-Components are the original UFM syntax and offer some shortcuts for some common use-cases for rendering labels. These include:
+| Component        | Use                                   | Example                          |
+| ---------------- | ------------------------------------- | -------------------------------- |
+| `umbValue`       | rendering the value of a property     | `{umbValue: heading}`            |
+| `umbContentName` | getting the name(s) of picked content | `{umbContentName: blogCategory}` |
+| `umbLink`        | gets the title of a picked link       | `{umbLink: callToAction}`        |
+| `umbLocalize`    | localizing a dictionary string        | `{umbLocalize: contact_us}`      |
 
-- `umbValue` for rendering the value of a property, e.g. `{umbValue: heading}`
-- `umbContentName` for getting the name(s) of picked content, e.g. ` {umbContentName: blogCategory}`
-- `umbLink` to get the title of a picked link, e.g. `{umbLink: callToAction}`
-- `umbLocalize` for localizing a dictionary string, e.g. `{umbLocalize: contact_us}`
+- More limited than Expressions
 
-These are more limited than Expressions, but currently these are the only methods of obtaining content names and localization keys. Also [filters with parameters currently only work for components](https://github.com/umbraco/Umbraco-CMS/issues/20744).
+- Only method of obtaining content names and localization keys (currently)
+
+- [Filters with parameters currently only work for components](https://github.com/umbraco/Umbraco-CMS/issues/20744) (bug)
+
+  <!--
+  Components are the original UFM syntax and offer some shortcuts for some common use-cases for rendering labels.
+  These are more limited than Expressions, but currently these are the only methods of obtaining content names and localization keys.
+   Also [filters with parameters currently only work for components](https://github.com/umbraco/Umbraco-CMS/issues/20744).
+  -->
 
 ---
 
 #### <solar-dollar-bold-duotone /> UFM Expressions
 
-Expressions are a closer parallel to the AngularJS templates we had previously. You can run simple, safe JS-like expressions to obtain values. The expressions have access to all property values as well as any block settings on a `$settings` variable and the block’s index in `$index` (0-based unlike in Angular where it was 1-based). Native, non-global JS functions are also allowed.
+- More like AngularJS templates
+- Simple, safe JS-like expressions
+- Access to content properties, `$settings`, `$index` (0-based)
+- Native non-global JS functions
 
 `${ $index+1 }. Rich Text: ${ content } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }`
+
+
+<!--
+Expressions are a closer parallel to the AngularJS templates we had previously.
+You can run simple, safe JS-like expressions to obtain values.
+The expressions have access to all property values as well as any block settings on a `$settings` variable and the block’s index in `$index` (0-based unlike in Angular where it was 1-based).
+Native, non-global JS functions are also allowed.
+-->
 
 ---
 
 #### <solar-filters-bold-duotone /> UFM Filters
 
+| Filter      | Parameters      | Use                                                          |
+| ----------- | --------------- | ------------------------------------------------------------ |
+| `wordLimit` | number of words | limits to a number of words                                  |
+| `truncate`  | length, suffix  | limits to a number of characters and appends a suffix (`…`) if trunctated |
+| `stripHtml` |                 | removes HTML markup leaving only the text                    |
+| `uppercase` |                 | converts text to UPPER CASE                                  |
+| `lowercase` |                 | converts text to lower case                                  |
+| `titleCase` |                 | converts text to Title Case                                  |
+| `fallback`  | fallback value  | taking a string parameter to show if the value would otherwise be null |
+| `bytes`     |                 | formats a number of bytes as human-readable text in KB, MB, GB, etc. |
+
+<!--
+
 Another parallel to AngularJS is the concept of Filters. These are piped onto the end of an existing component or expression to further modify the value.
 
-The currently available filters are:
+`wordLimit` and `truncate` truncate a string to the specified number of words or characters
 
-- `wordLimit`* taking a parameter for the number of words
-- `truncate`* taking a parameter for number of characters and a string to indicate truncation (`…`)
-- `stripHtml` removes HTML markup leaving only the text, useful for rendering a preview of rich text content
-- `uppercase`
-- `lowercase`
-- `titleCase`
-- `fallback`* taking a string parameter to show if the value would otherwise be null
-- `bytes` formats a number of bytes as human-readable text in, for example, GB
+`stripHtml` useful for rendering a preview of rich text content
+
+`uppercase`, `lowercase`, `titleCase` changes the casing
+
+`fallback`  allows you to specify a fallback value if the right hand side of the filter is falsey
+
+`bytes` converts a filesize in bytes to human-readable KB, MB or GB
+
+[Filters with parameters don’t currently work for expressions](https://github.com/umbraco/Umbraco-CMS/issues/20744)
+
+-->
 
 ---
 
@@ -295,6 +502,10 @@ The filters allow us to tidy up our example from earlier by stripping the HTML, 
 `${ $index+1 }. Rich Text: {umbValue: content | stripHtml | truncate:30 | fallback:[Empty] } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }`
 
 [Filters with parameters don’t currently work for expressions](https://github.com/umbraco/Umbraco-CMS/issues/20744)
+
+<!--
+The filters allow us to tidy up our example from earlier by stripping the HTML, truncating and providing a fallback.
+-->
 
 ---
 
@@ -308,6 +519,10 @@ Image Carousel ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
 ```
 
 ![](/images/blocks-basic-templates.png)
+
+<!--
+
+-->
 
 ---
 
@@ -370,7 +585,7 @@ export const manifests: Array<UmbExtensionManifest> = [
 ````
 
 [Extension types - Umbraco Docs](https://docs.umbraco.com/umbraco-cms/customizing/extending-overview/extension-types){v-click="[2,3]"}
-<code v-click="[6,7]">\{dateFormat: datePropertyAlias\}</code>
+<code v-click="[6,7]">\{umbValue:dateProperty | dateFormat \}</code>
 ---
 layout: default
 ---
