@@ -194,7 +194,7 @@ The old way:
 
 Verses in modern Umbraco:
 
-<<< @/snippets/slide-16.md md
+<<< @/snippets/property-descriptions-read-more-new.md md
 
 
 <!--
@@ -213,7 +213,7 @@ We can even take that a step further...
 layout: center
 ---
 
-<<< @/snippets/slide-19.md md {all|7|2,3,5,9|4}
+<<< @/snippets/property-descriptions-read-more-new-eg.md md {all|7|2,3,5,9|4}
 
 
 <!--
@@ -492,7 +492,7 @@ The filters allow us to tidy up our example from earlier by stripping the HTML, 
 
 ---
 
-<<< @/snippets/slide-43.md md
+<<< @/snippets/block-labels-clean.md md
 
 
 ![](/images/blocks-basic-templates.png)
@@ -674,7 +674,7 @@ Which allows us to...
 layout: center
 ---
 
-<<< @/snippets/slide-56.md md
+<<< @/snippets/creating-a-custom-ufm-filter-eg.md md
 
 
 ![](/images/block-date-filter.png)
@@ -811,7 +811,7 @@ layout: none
   }
 </style>
 
-<<< @/snippets/slide-67.ts ts{monaco}
+<<< @/snippets/creating-a-custom-ufm-component-full.ts ts{monaco}
 
 
 <!--
@@ -825,14 +825,14 @@ layout: none
 
 ---
 
-<<< @/snippets/slide-68.md#snippet-1 md
+<<< @/snippets/creating-a-custom-ufm-component-eg.md#snippet-1 md
 
 replaced with
-<<< @/snippets/slide-68.md#snippet-2 md
+<<< @/snippets/creating-a-custom-ufm-component-eg.md#snippet-2 md
 
 
 Also added
-<<< @/snippets/slide-68.md#snippet-3 md
+<<< @/snippets/creating-a-custom-ufm-component-eg.md#snippet-3 md
 
 
 ![](/images/block-tag-component.png)
@@ -890,7 +890,7 @@ We're back in our manifests file
 layout: none
 ---
 
-<<< @/snippets/slide-75.ts ts{monaco}
+<<< @/snippets/custom-block-views-full.ts ts{monaco}
 
 
 <!--
@@ -955,7 +955,7 @@ Now we can add our own!
 
 ## <solar-notification-unread-bold-duotone/> Custom entity signs
 
-<<< @/snippets/custom-entity-signs.cs csharp
+<<< @/snippets/custom-entity-signs-delete-locking.cs csharp
 
 
 <!-- 
@@ -992,9 +992,9 @@ Now we can add our own!
 ---
 
 ````md magic-move[My.UmbracoBackofficeExtensions\LockedDocumentFlagProvider.cs ~i-vscode-icons:file-type-csharp~]
-<<< @/snippets/slide-85.cs#snippet-1 csharp{*|1|3|4-7|9-19|21-24}
+<<< @/snippets/custom-entity-signs-full.cs#snippet-1 csharp{*|1|3|4-7|9-19|21-24}
 
-<<< @/snippets/slide-85.cs#snippet-2 csharp{6-23|22}
+<<< @/snippets/custom-entity-signs-full.cs#snippet-2 csharp{6-23|22}
 
 ````
 
