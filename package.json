@@ -7,7 +7,8 @@
     "dev": "slidev --open",
     "export": "slidev export",
     "extract-snippets": "node ./scripts/extract-snippets.mjs",
-    "rename-file": "node ./scripts/rename-file.mjs"
+    "rename-file": "node ./scripts/rename-file.mjs",
+    "slides-to-article": "node ./scripts/slides-to-article.mjs"
   },
   "dependencies": {
     "@iconify-json/simple-icons": "^1.2.57",
