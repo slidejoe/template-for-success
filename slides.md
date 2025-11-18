@@ -187,32 +187,15 @@ layout: two-cols-header
 
 The old way:
 
-```md
-Short description
+<<< @/snippets/property-descriptions-read-more.md md
 
----
-
-Descriptions below a `---` were rendered behind a "Read More" link in v9-13.
-```
 
 ::right::
 
 Verses in modern Umbraco:
 
-```md
-Short description
+<<< @/snippets/slide-16.md md
 
----
-
-Three dashes renders a horizontal rule.
-
-<details>
-<summary>Read more</summary>
-
-We have to use the native HTML `details` element for modern Umbraco.
-
-</details>
-```
 
 <!--
 One of the features that's changed in recent versions is the "read more" functionality.
@@ -230,17 +213,8 @@ We can even take that a step further...
 layout: center
 ---
 
-```md {all|7|2,3,5,9|4}
-Should search engines and other crawlers index this page and serve them up as search results?
-<details>
-<summary>
-  <uui-icon name="icon-help-alt" label="More details"></uui-icon> 
-</summary>
+<<< @/snippets/slide-19.md md {all|7|2,3,5,9|4}
 
-This sets the *index* aspect of the [`robots` meta tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/robots)
-
-</details>
-```
 
 <!--
 
@@ -311,23 +285,8 @@ The main difference is in how the blocks are rendered...
 
 ### <solar-full-screen-square-bold-duotone/> RTE Block views
 
-```razor[TemplateForSuccess.Web\Views\Partials\RichText\Components\PhoneNumberRteBlock.cshtml ~i-vscode-icons:file-type-razor~]
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.RichTextBlockItem<ContentModels.PhoneNumberRteBlock>>
-@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
-@using System.Text.RegularExpressions
-@{
-	var contactPage = Model.Content.ContactUsPage as ContentModels.Contact;
+<<< @/snippets/rte-block-views.razor razor
 
-	if(contactPage is null || string.IsNullOrWhiteSpace(contactPage.PhoneNumber))
-	{
-		return;
-	}
-}
-
-<a href="tel:@contactPage.PhoneNumber.Replace(" ", "")">
-	@Regex.Replace(contactPage.PhoneNumber, @"\+44\s*", "0")
-</a>
-```
 
 <!--
   Simply needs a view matching the alias in the Views\Partials\RichText\Components folder
@@ -533,14 +492,8 @@ The filters allow us to tidy up our example from earlier by stripping the HTML, 
 
 ---
 
-```md
-Rich Text: ${ content.markup | stripHtml } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
-Image: ${ caption } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
-Video: ${ caption != '' ? caption : videoUrl } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
-Code Snippet: ${ title } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
-Image Carousel ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
-{umbContentName:articleList} Articles ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
-```
+<<< @/snippets/slide-43.md md
+
 
 ![](/images/blocks-basic-templates.png)
 
@@ -661,24 +614,10 @@ layout: default
 ### <solar-filters-bold-duotone/> Creating a custom UFM Filter
 
 ````md magic-move[My.UmbracoBackofficeExtensions\Client\src\manifests.ts]
-```ts
-export const manifests: Array<UmbExtensionManifest> = [
-  //TODO: Add your extension manifests here
-];
-```
-```ts{all|3|4|5|6|7-9|6}
-export const manifests: Array<UmbExtensionManifest> = [
-  {
-    type: 'ufmFilter',
-    alias: 'My.UfmFilter.DateFormat',
-    name: 'Date Format UFM Filter',
-    api: () => import('./date-format.filter'),
-    meta: {
-      alias: 'dateFormat'
-    }
-  }
-];
-```
+<<< @/snippets/creating-a-custom-ufm-filter.ts#snippet-1 ts
+
+<<< @/snippets/creating-a-custom-ufm-filter.ts#snippet-2 ts{all|3|4|5|6|7-9|6}
+
 ````
 
 [Extension types - Umbraco Docs](https://docs.umbraco.com/umbraco-cms/customizing/extending-overview/extension-types){v-click="[2,3]"}
@@ -706,87 +645,16 @@ layout: default
 
 
 ````md magic-move[My.UmbracoBackofficeExtensions\Client\src\date-format.filter.ts]
-```ts{all|3|4-6}
-import { UmbUfmFilterBase } from '@umbraco-cms/backoffice/ufm';
+<<< @/snippets/creating-a-custom-ufm-filter.ts#snippet-3 ts{all|3|4-6}
 
-class UmbUfmDateFormatFilterApi extends UmbUfmFilterBase {
-  filter(value) {
-    // TODO: Manipulate the value here
-    return value;
-  }
-}
-export { UmbUfmDateFormatFilterApi as api };
-```
-```ts{4}
-import { UmbUfmFilterBase } from '@umbraco-cms/backoffice/ufm';
+<<< @/snippets/creating-a-custom-ufm-filter.ts#snippet-4 ts{4}
 
-class UmbUfmDateFormatFilterApi extends UmbUfmFilterBase {
-  filter(value, format) {
-    // TODO: Manipulate the value here
-    return value;
-  }
-}
-export { UmbUfmDateFormatFilterApi as api };
-```
-```ts{6-10}
-import { UmbUfmFilterBase } from '@umbraco-cms/backoffice/ufm';
-import { DateTime } from 'luxon';
+<<< @/snippets/creating-a-custom-ufm-filter.ts#snippet-5 ts{6-10}
 
-class UmbUfmDateFormatFilterApi extends UmbUfmFilterBase {
-  filter(value, format) {
-    if (!value) return value;
+<<< @/snippets/creating-a-custom-ufm-filter.ts#snippet-6 ts{6-14}
 
-    const date = DateTime.fromISO(value.date, { zone: value.timeZone });
+<<< @/snippets/creating-a-custom-ufm-filter.ts#snippet-7 ts
 
-    return date.toFormat(format || "yyyy-MM-dd HH:mm");
-  }
-}
-export { UmbUfmDateFormatFilterApi as api };
-```
-```ts{6-14}
-import { UmbUfmFilterBase } from '@umbraco-cms/backoffice/ufm';
-import { DateTime } from 'luxon';
-
-class UmbUfmDateFormatFilterApi extends UmbUfmFilterBase {
-  filter(value, format) {
-    if (!value) return value;
-
-    const date = value instanceof Date ?
-      DateTime.fromJSDate(value) :
-      typeof value === 'string' ?
-        DateTime.fromISO(value) :
-        DateTime.fromISO(value.date, { zone: value.timeZone || undefined });
-
-    return date.toFormat(format || "yyyy-MM-dd HH:mm");
-  }
-}
-export { UmbUfmDateFormatFilterApi as api };
-```
-```ts
-import { UmbUfmFilterBase } from '@umbraco-cms/backoffice/ufm';
-import { DateTime } from 'luxon';
-
-class UmbUfmDateFormatFilterApi extends UmbUfmFilterBase {
-  filter(value?: Date | string | { date: string, timeZone: string | undefined | null } | undefined | null, format?: string) {
-    if (!value) return value;
-
-    const date = value instanceof Date ?
-      DateTime.fromJSDate(value) :
-      typeof value === 'string' ?
-        DateTime.fromISO(value) :
-        DateTime.fromISO(value.date, { zone: value.timeZone || undefined });
-
-    if (date.invalidReason) {
-      console.error(`Invalid date passed to dateFormat filter: ${date.invalidReason}\r\n${date.invalidExplanation}`);
-      return '';
-    }
-
-    // Allowed formats: https:// moment.github.io/luxon/#/formatting?id=table-of-tokens
-    return date.toFormat(format || "yyyy-MM-dd HH:mm");
-  }
-}
-export { UmbUfmDateFormatFilterApi as api };
-```
 ````
 
 <!--
@@ -806,9 +674,8 @@ Which allows us to...
 layout: center
 ---
 
-```md
-{umbContentName:articleList} Articles${ dateFrom ? ' since ' : '' }{umbValue: dateFrom|dateFormat:MMMM yyyy} ${$settings.hide == '1' ? '[HIDDEN]' : ''}
-```
+<<< @/snippets/slide-56.md md
+
 
 ![](/images/block-date-filter.png)
 
@@ -859,41 +726,10 @@ layout: default
 ### <solar-circle-top-up-bold-duotone /> Creating a custom UFM Component
 
 ````md magic-move[My.UmbracoBackofficeExtensions\Client\src\manifests.ts]
-```ts
-export const manifests: Array<UmbExtensionManifest> = [
-  {
-    type: 'ufmFilter',
-    alias: 'My.UfmFilter.DateFormat',
-    name: 'Date Format UFM Filter',
-    api: () => import('./date-format.filter'),
-    meta: {
-      alias: 'dateFormat'
-    }
-  }
-];
-```
-```ts{11-19|17|15}
-export const manifests: Array<UmbExtensionManifest> = [
-  {
-    type: 'ufmFilter',
-    alias: 'My.UfmFilter.DateFormat',
-    name: 'Date Format UFM Filter',
-    api: () => import('./date-format.filter'),
-    meta: {
-      alias: 'dateFormat'
-    }
-  },
-  {
-    type: 'ufmComponent',
-    alias: 'My.UfmComponent.Tag',
-    name: 'Tag UFM Component',
-    api: () => import('./tag.component'),
-    meta: {
-      alias: 'tag'
-    }
-  }
-];
-```
+<<< @/snippets/creating-a-custom-ufm-component.ts#snippet-1 ts
+
+<<< @/snippets/creating-a-custom-ufm-component.ts#snippet-2 ts{11-19|17|15}
+
 ````
 
 <code v-click="[2,3]">\{tag: booleanProperty \}</code>
@@ -914,48 +750,10 @@ layout: default
 ### <solar-circle-top-up-bold-duotone /> Creating a custom UFM Component
 
 ````md magic-move[My.UmbracoBackofficeExtensions\Client\src\tag.component.ts]
-```ts{all|6|7-12|10|11|11,4}
-import { Tokens } from '@umbraco-cms/backoffice/external/marked';
-import { UmbUfmComponentBase } from '@umbraco-cms/backoffice/ufm';
+<<< @/snippets/creating-a-custom-ufm-component.ts#snippet-3 ts{all|6|7-12|10|11|11,4}
 
-import './tag.element';
+<<< @/snippets/creating-a-custom-ufm-component.ts#snippet-4 ts{3,10-21}
 
-export class TagUfmComponentApi extends UmbUfmComponentBase {
-  render(token: Tokens.Generic) {
-    if (!token.text) return;
-
-    const attributes = super.getAttributes(token.text);
-    return `<ufm-my-tag ${attributes}></ufm-my-tag>`;
-  }
-}
-
-export { TagUfmComponentApi as api };
-```
-```ts{3,10-21}
-//...
-export class TagUfmComponentApi extends UmbUfmComponentBase {
-  constructor() { ... }
-  render(token: Tokens.Generic) {
-    if (!token.text) return;
-
-    const attributes = this.getAttributes(token.text);
-    return `<ufm-my-tag ${attributes}></ufm-my-tag>`;
-  }
-  protected override getAttributes(text: string): string | null {
-    if (!text) return null;
-
-    const pipeIndex = text.indexOf('|');
-    const left = text.substring(0, pipeIndex == -1 ? undefined: pipeIndex).trim();
-    const filters = pipeIndex === -1 ? null : text.substring(pipeIndex + 1).trim();
-    const parts = left.split(':'), alias = parts[0].trim(), display = parts[1]?.trim(), color = parts[2]?.trim(), look = parts[3]?.trim();
-
-    return Object.entries({ alias, filters, display, color, look })
-      .map(([key, value]) => (value ? `${key}="${value.trim()}"` : null))
-      .join(' ');
-  }
-}
-//...
-```
 ````
 
 <!--
@@ -981,45 +779,10 @@ layout: default
 ### <solar-circle-top-up-bold-duotone /> Creating a custom UFM Component
 
 ````md magic-move[My.UmbracoBackofficeExtensions\Client\src\tag.element.ts]
-```ts{*|5|4,9,9-16|7|6}
-import { customElement, property, state, html, css } from '@umbraco-cms/backoffice/external/lit';
-import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
+<<< @/snippets/creating-a-custom-ufm-component.ts#snippet-5 ts{*|5|4,9,9-16|7|6}
 
-@customElement('ufm-my-tag')
-export class UmbUfmLabelValueElement extends UmbUfmElementBase  {
-  constructor() { ... }
-  static styles = css`...`;
-}
+<<< @/snippets/creating-a-custom-ufm-component.ts#snippet-6 ts{all|4-5|8-13}
 
-export { UmbUfmLabelValueElement as element };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'ufm-my-tag': UmbUfmLabelValueElement;
-  }
-}
-```
-```ts{all|4-5|8-13}
-//...
-export class UmbUfmLabelValueElement extends UmbUfmElementBase  {
-  constructor() {
-    this.consumeContext(UMB_UFM_RENDER_CONTEXT, (context) => {
-      this.observe(
-        context?.value,
-        (value) => {
-          if (this.alias !== undefined && value !== undefined && typeof value === 'object') {
-            this.value = (value as Record<string, unknown>)[this.alias];
-          } else {
-            this.value = value;
-          }
-          //TODO: manipulate the value here, or look up other values, etc
-        },
-        'observeValue',
-      );
-    });
-  }
-//...
-```
 ````
 
 <!--
@@ -1048,74 +811,8 @@ layout: none
   }
 </style>
 
-```ts{monaco}
-import { customElement, property, state, html, css } from '@umbraco-cms/backoffice/external/lit';
-import { UMB_UFM_RENDER_CONTEXT } from '@umbraco-cms/backoffice/ufm';
-import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
+<<< @/snippets/slide-67.ts ts{monaco}
 
-@customElement('ufm-my-tag')
-// Doesn't have to extend UmbUfmElementBase, that class forces render to return a string rather than an HTML template,
-// but does include some filter logic (which this element just ignores anyway)
-export class UmbUfmLabelValueElement extends UmbLitElement  {
-  @property()
-  alias?: string;
-
-  @property()
-  display?: string;
-
-  @property()
-  color?: string;
-
-  @property()
-  look?: string;
-
-  @state()
-  show: Boolean;
-
-  constructor() {
-    super();
-
-    this.show = false;
-
-    this.consumeContext(UMB_UFM_RENDER_CONTEXT, (context) => {
-      this.observe(
-        context?.value,
-        (value) => {
-          if (this.alias !== undefined && value !== undefined && typeof value === 'object') {
-            var obj = value as Record<string, unknown>;
-            var settings = (obj["$settings"] as Record<string, unknown>) ?? {};
-            this.show = !!(obj[this.alias] || settings[this.alias]);
-          } else {
-            this.show = !!value;
-          }
-        },
-        'observeValue',
-      );
-    });
-  }
-
-  override render() {
-    if (this.show) {
-      return html`<uui-tag color="${this.color}" look="${this.look}">${this.display}</uui-tag>`;
-    }
-    return null;
-  }
-
-  static styles = css`
-    uui-tag {
-      margin: 0 1ex;
-    }
-  `;
-}
-
-export { UmbUfmLabelValueElement as element };
-
-declare global {
-  interface HTMLElementTagNameMap {
-    'ufm-my-tag': UmbUfmLabelValueElement;
-  }
-}
-```
 
 <!--
 - Changed my base class so I can return HTML (bug?)
@@ -1128,18 +825,15 @@ declare global {
 
 ---
 
-```md
-${ $settings.hide == '1' ? '[HIDDEN]' : '' }
-```
+<<< @/snippets/slide-68.md#snippet-1 md
+
 replaced with
-```md
-{tag: hide:Hidden:warning:secondary}
-```
+<<< @/snippets/slide-68.md#snippet-2 md
+
 
 Also added
-```md
-{tag: showPagination:Paginated:default:outline}
-```
+<<< @/snippets/slide-68.md#snippet-3 md
+
 
 ![](/images/block-tag-component.png)
 
@@ -1177,41 +871,10 @@ Custom block views have changed with recent versions too, so let's take a look a
 ## <solar-align-vertical-spacing-bold-duotone/> Custom block views
 
 ````md magic-move[My.UmbracoBackofficeExtensions\Client\src\manifests.ts]
-```ts
-export const manifests: Array<UmbExtensionManifest> = [
-  // ...
-  {
-    type: 'ufmComponent',
-    alias: 'My.UfmComponent.Tag',
-    name: 'Tag UFM Component',
-    api: () => import('./tag.component'),
-    meta: {
-      alias: 'tag'
-    }
-  }
-];
-```
-```ts{12-18|13|17|16}
-export const manifests: Array<UmbExtensionManifest> = [
-  // ...
-  {
-    type: 'ufmComponent',
-    alias: 'My.UfmComponent.Tag',
-    name: 'Tag UFM Component',
-    api: () => import('./tag.component'),
-    meta: {
-      alias: 'tag'
-    }
-  },
-  {
-    type: 'blockEditorCustomView',
-    alias: 'My.HiddenBlockEditorView',
-    name: 'Hidden Block Editor View',
-    element: () => import('./hidden-block.element'),
-    forBlockEditor: 'block-list'
-  }
-];
-```
+<<< @/snippets/custom-block-views.ts#snippet-1 ts
+
+<<< @/snippets/custom-block-views.ts#snippet-2 ts{12-18|13|17|16}
+
 ````
 
 <!--
@@ -1227,97 +890,8 @@ We're back in our manifests file
 layout: none
 ---
 
-```ts{monaco}
-import { html, customElement, LitElement, property, css, when } from '@umbraco-cms/backoffice/external/lit';
-import { UmbElementMixin } from '@umbraco-cms/backoffice/element-api';
-import type { UmbBlockDataType } from '@umbraco-cms/backoffice/block';
-import type { UmbBlockEditorCustomViewElement, UmbBlockEditorCustomViewConfiguration } from '@umbraco-cms/backoffice/block-custom-view';
+<<< @/snippets/slide-75.ts ts{monaco}
 
-@customElement('hidden-block-custom-view')
-// UmbRefListBlockElement is not exposed to extend it, so we have to copy a lot of it in to replace it
-export class HiddenBlockCustomView extends UmbElementMixin(LitElement) implements UmbBlockEditorCustomViewElement {
-	
-	@property({ type: String, reflect: false })
-	label?: string;
-
-	@property({ type: String, reflect: false })
-	icon?: string;
-
-	@property({ type: Number, attribute: false })
-	index?: number;
-
-	@property({ type: Boolean, reflect: true })
-	unpublished?: boolean;
-
-	@property({ attribute: false })
-	content?: UmbBlockDataType;
-
-	@property({ attribute: false })
-	settings?: UmbBlockDataType;
-
-	@property({ attribute: false })
-	config?: UmbBlockEditorCustomViewConfiguration;
-
-	override render() {
-		const blockValue = { ...this.content, $settings: this.settings, $index: this.index };
-		return html`
-			<uui-ref-node standalone
-        href=${(this.config?.showContentEdit ? this.config?.editContentPath : undefined) ?? ''}
-        class="${this.settings?.hide ? 'hidden' : ''}">
-			${when(
-				this.settings?.hide,
-				() =>
-					html`<umb-icon slot="icon" name="icon-checkbox-dotted"></umb-icon>`,
-				() =>
-					html`<umb-icon slot="icon" .name=${this.icon}></umb-icon>`
-			)}
-				<umb-ufm-render slot="name" inline .markdown=${this.label} .value=${blockValue}></umb-ufm-render>
-				${when(
-					this.unpublished,
-					() =>
-						html`<uui-tag slot="name" look="secondary" title=${this.localize.term('blockEditor_notExposedDescription')}
-									><umb-localize key="blockEditor_notExposedLabel"></umb-localize
-								></uui-tag>`,
-				)}
-				${when(
-					this.settings?.hide,
-					() =>
-						html`<uui-tag slot="name" look="secondary" title="Hidden"
-								>Hidden</umb-localize
-							></uui-tag>`
-				)}
-			</uui-ref-node>
-		`;
-	}
-
-	static override styles = [
-		css`
-			uui-ref-node {
-				min-height: var(--uui-size-16);
-			}
-			uui-tag {
-				margin-left: 0.5em;
-				margin-bottom: -0.3em;
-				margin-top: -0.3em;
-				vertical-align: text-top;
-			}
-			:host([unpublished]) umb-icon,
-			.hidden umb-icon,
-			:host([unpublished]) umb-ufm-render,
-			.hidden umb-ufm-render {
-				opacity: 0.6;
-			}
-		`,
-	];
-}
-export default HiddenBlockCustomView;
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'hidden-block-custom-view': HiddenBlockCustomView;
-	}
-}
-```
 
 <!--
 - We're extending the `UmbElementMixin` and implementing `UmbBlockEditorCustomViewElement`.
@@ -1381,30 +955,8 @@ Now we can add our own!
 
 ## <solar-notification-unread-bold-duotone/> Custom entity signs
 
-```csharp[My.UmbracoBackofficeExtensions\Notifications\LockedDocumentContentMovingToRecycleBinNotificationHandler.cs ~i-vscode-icons:file-type-csharp~]
-/// A common use case: prevent certain document types being deleted
-public class LockedDocumentContentMovingToRecycleBinNotificationHandler : INotificationHandler<ContentMovingToRecycleBinNotification>
-{
-    public static string[] LOCKED_ALIASES = ["home", "error"];
-    public static Guid[] LOCKED_IDS = [
-      Guid.Parse("a95360e8-ff04-40b1-8f46-7aa4b5983096"),
-      Guid.Parse("9db112c5-c2ea-441d-8bd4-6daf522aa2b6")
-    ];
-    public void Handle(ContentMovingToRecycleBinNotification notification)
-    {
-        foreach (var item in notification.MoveInfoCollection)
-        {
-            if (Array.Exists(LOCKED_ALIASES, alias => alias.Equals(item.Entity.ContentType.Alias, StringComparison.OrdinalIgnoreCase)))
-            {
-                notification.CancelOperation(new EventMessage(
-                  $"{item.Entity.Name} cannot be trashed",
-                  $"The content item '{item.Entity.Name}' is of type '{item.Entity.ContentType.Name}' which cannot be trashed.",
-                  EventMessageType.Error));
-            }
-        }
-    }
-}
-```
+<<< @/snippets/custom-entity-signs.cs csharp
+
 
 <!-- 
 
@@ -1419,40 +971,10 @@ public class LockedDocumentContentMovingToRecycleBinNotificationHandler : INotif
 ## <solar-notification-unread-bold-duotone/> Custom entity signs
 
 ````md magic-move[My.UmbracoBackofficeExtensions\Client\src\manifests.ts]
-```ts
-export const manifests: Array<UmbExtensionManifest> = [
-  // ...
-    name: 'Hidden Block Editor View',
-    element: () => import('./hidden-block.element'),
-    forBlockEditor: 'block-list'
-  }
-];
-```
-```ts{9-23|10-11|12-13|14|16|17-21|15|9-23}
-import { UMB_DOCUMENT_ENTITY_TYPE } from '@umbraco-cms/backoffice/document';
+<<< @/snippets/custom-entity-signs.ts#snippet-1 ts
 
-export const manifests: Array<UmbExtensionManifest> = [
-  // ...
-    name: 'Hidden Block Editor View',
-    element: () => import('./hidden-block.element'),
-    forBlockEditor: 'block-list'
-  },
-  {
-    type: 'entitySign',
-    kind: 'icon',
-    alias: 'Umb.EntitySign.Document.My.Locked',
-    name: 'Is Locked Document Entity Sign',
-    forEntityTypes: [UMB_DOCUMENT_ENTITY_TYPE],
-    forEntityFlags: ['Umb.My.Locked'],
-    weight: -1000,
-    meta: {
-      iconName: 'icon-lock',
-      label: 'Locked',
-      iconColorAlias: 'red',
-    }
-  }
-];
-```
+<<< @/snippets/custom-entity-signs.ts#snippet-2 ts{9-23|10-11|12-13|14|16|17-21|15|9-23}
+
 ````
 
 <!--
@@ -1470,59 +992,10 @@ export const manifests: Array<UmbExtensionManifest> = [
 ---
 
 ````md magic-move[My.UmbracoBackofficeExtensions\LockedDocumentFlagProvider.cs ~i-vscode-icons:file-type-csharp~]
-```csharp{*|1|3|4-7|9-19|21-24}
-public class LockedDocumentFlagProvider : IFlagProvider
-{
-    private const string Alias = Constants.Conventions.Flags.Prefix + "My.Locked";
-    // Indicate that this flag provider only provides flags for documents.
-    public bool CanProvideFlags<TItem>()
-        where TItem : IHasFlags => typeof(TItem) == typeof(DocumentTreeItemResponseModel) ||
-        typeof(TItem) == typeof(DocumentCollectionResponseModel) || typeof(TItem) == typeof(DocumentItemResponseModel);
+<<< @/snippets/slide-85.cs#snippet-1 csharp{*|1|3|4-7|9-19|21-24}
 
-    public Task PopulateFlagsAsync<TItem>(IEnumerable<TItem> itemViewModels) where TItem : IHasFlags
-    {
-        foreach (TItem item in itemViewModels)
-        {
-            if (ShouldAddFlag(item))
-            {
-                item.AddFlag(Alias);
-            }
-        }
-        return Task.CompletedTask;
-    }
+<<< @/snippets/slide-85.cs#snippet-2 csharp{6-23|22}
 
-    private bool ShouldAddFlag<TItem>(TItem item)
-    {
-      //...
-    }
-}
-```
-```csharp{6-23|22}
-public class LockedDocumentFlagProvider : IFlagProvider
-{
-  private const string Alias = Constants.Conventions.Flags.Prefix + "My.Locked";
-  public bool CanProvideFlags<TItem>() where TItem : IHasFlags { ... }
-  public Task PopulateFlagsAsync<TItem>(IEnumerable<TItem> itemViewModels) where TItem : IHasFlags { ... }
-  private bool ShouldAddFlag<TItem>(TItem item)
-  {
-      Guid id;
-      switch (item)
-      {
-          case DocumentTreeItemResponseModel dti:
-              id = dti.DocumentType.Id;
-              break;
-          case DocumentCollectionResponseModel dc:
-              id = dc.DocumentType.Id;
-              break;
-          case DocumentItemResponseModel di:
-              id = di.DocumentType.Id;
-              break;
-          default: return false;
-      }
-      return LockedDocumentContentMovingToRecycleBinNotificationHandler.LOCKED_IDS.Contains(id);
-  }
-}
-```
 ````
 
 <!--

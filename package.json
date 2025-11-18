@@ -5,7 +5,8 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "extract-snippets": "node ./scripts/extract-snippets.mjs",
   },
   "dependencies": {
     "@iconify-json/simple-icons": "^1.2.57",
