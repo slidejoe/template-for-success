@@ -59,6 +59,12 @@ tagline: Senior Developer at Bump Digital
 -->
 
 ---
+layout: intro
+---
+
+# <solar-question-circle-bold-duotone/><br/>Why does backoffice UX matter?
+
+---
 layout: quote
 ---
 
@@ -120,6 +126,17 @@ Today we're going to look at some features that have changed in recent releases.
 -->
 
 ---
+layout: intro
+---
+
+# <solar-text-circle-line-duotone/><br />Property descriptions
+
+<!--
+I'm sure you're already aware of property descriptions!
+
+Useful to explain a property when a name doesn't give enough detail.
+-->
+---
 layout: icons-header
 ---
 
@@ -137,10 +154,6 @@ Useful to explain a property when a name won't do it.
 </v-clicks>
 
 <!--
-
-I'm sure you're already aware of property descriptions!
-
-Useful to explain a property when a name doesn't give enough detail.
 
 [Click]
 
@@ -262,23 +275,28 @@ backgroundSize: contain
 This much richer and detailed description with an expanding section with hyperlinks for those who require additional help.
 -->
 
+
 ---
-
-## <solar-full-screen-square-bold-duotone/> RTE Blocks
-
-<v-click>
-
-![](/images/rte-toolbar-settings.png){style="height:200px"}
-![](/images/rte-blocks-settings.png){style="height:200px"}
-
-</v-click>
+layout: intro
+---
+# <solar-full-screen-square-bold-duotone/><br />Rich Text Editor Blocks
 
 <!--
 Another feature new to recent Umbraco versions is rich text editor blocks.
 
 Work just like blocks in block list and block grid.
 
-[Click]
+-->
+
+---
+
+## <solar-full-screen-square-bold-duotone/> RTE Blocks Setup
+
+![](/images/rte-toolbar-settings.png){style="height:200px"}
+![](/images/rte-blocks-settings.png){style="height:200px"}
+
+
+<!--
 
 To configure element types for use in the RTE, we need to:
 - add the blocks toolbar button
@@ -359,8 +377,14 @@ Which is not the most helpful if you're trying to find a specific block in a lis
  -->
 
 ---
+layout: intro
+---
 
-## Block labels
+# <solar-tag-bold-duotone/><br/>Block label templates
+
+---
+
+## <solar-tag-bold-duotone/> Block label templates
 
 We used to be able to achieve this using [AngularJS templates](https://joe.gl/ombek/blog/umbraco-angularjs-filter-cheat-sheet/) where we could do things like:
 
@@ -386,7 +410,7 @@ But with the removal of AngularJS, came the removal of AngualarJS templates...
 layout: icons-header
 ---
 
-### Umbraco Flavored Markdown (UFM)
+### <solar-square-arrow-down-bold-duotone/> Umbraco Flavored Markdown (UFM)
 
 There are several syntaxes for using UFM:
 
@@ -521,21 +545,52 @@ Image Carousel ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
 ![](/images/blocks-basic-templates.png)
 
 <!--
-
+These are the templates I recently PR'd to the Clean Starter Kit, which take advantage of a lot of the features we talked about
 -->
 
 ---
 
 ### Extending UFM
 
-The difficulty with replacing something as complex as AngularJS templates is that they were so flexible it’s hard for Umbraco to know what people were doing with it, and thus what to replicate. But where features are missing, they’ve been responsive to feature requests and have also provided multiple mechanisms to extend UFM.
+<v-clicks>
+
+- AngularJS templates were so flexible it’s hard for Umbraco to know what people were doing with it!
+- Not every use case has been replicated
+- Features are being added quickly when requested
+- Mechanisms to extend UFM:
+
+  - custom components
+  
+  - custom filters
+    synchronous functions that are best used for basic string manipulation and cannot render HTML
+
+</v-clicks>
+
+<!--
+The difficulty with replacing something as complex as AngularJS templates [Click] is that they were so flexible it’s hard for Umbraco to know what people were doing with it,
+
+[Click] and thus what to replicate.
+
+[Click] But where features are missing, they’ve been responsive to feature requests and
+
+[Click] have also provided multiple mechanisms to extend UFM.
 
 We’re provided with the option to create custom components or custom filters.
 
+-->
+
+---
+layout: intro
+---
+
+# <solar-box-bold-duotone/><br />Extending the Umbraco Backoffice
 
 
-Custom filters are synchronous functions that are best used for basic string manipulation and cannot render HTML.
+<!--
 
+But first, we need to know how to extend the backoffice
+
+-->
 ---
 
 ## <solar-box-bold-duotone/> Extending the Umbraco Backoffice
@@ -546,21 +601,63 @@ Custom filters are synchronous functions that are best used for basic string man
 
 - Harder for one-off tweaks to sites
 
+<!--
+
+Changed significantly in recent versions
+
+And it's geared up for packages and less for one-off tweaks to individual sites
+-->
+
 ---
 
 ### <solar-box-bold-duotone/> Creating an extension
 
-<v-clicks every="2">
+<v-clicks every="3">
 
 - [Vite Package Setup - Umbraco Docs](https://docs.umbraco.com/umbraco-cms/customizing/development-flow/vite-package-setup)
 - [Lotte's Opinionated Umbraco Package Starter Template](https://github.com/LottePitcher/opinionated-package-starter)
+- Vanilla JS ([No, you don’t need Lit, Vite, or TypeScript to Extend the Umbraco Backoffice - Luuk Peters](https://dev.to/luukpeters/no-you-dont-need-lit-vite-or-typescript-to-extend-the-umbraco-backoffice-2mg6))
 - [Bump's Umbraco Backoffice Extension Starter](https://github.com/bumpdigital/umbraco-backoffice-extension-starter)
 
 </v-clicks>
 
+<!--
+Several options for starting out creating an extension
+
+[Click]
+
+- Umbraco docs guide to creating a Vite-based package
+- Lotte's opinionated starter template
+- Vanilla JS, as highlighted by Luuk Peters
+
+But these didn't suit us at Bump.
+
+The docs guide involved a lot of steps and deleting sample code, we wanted something quicker!
+
+Lotte's template is fantastic for creating versioned, distributed packages but is overkill for our use case
+
+Although Vanilla JS is simple and works really well for smaller extensions, I prefer the full TypeScript, Lit and Vite setup so its easier to add larger extensions to a project without a second bottleneck.
+
+And as we know in software development, when there are too many options, [Click] make another one!
+
+- Should be a dotnet or npm template
+- for now just a zip file
+- creates razor class library
+- with vite, typescript and lit
+- just the basic config, no samples to delete
+
+-->
+
+---
+layout: intro
+---
+
+# <solar-filters-bold-duotone/><br />Creating a custom UFM Filter
+
 ---
 layout: default
 ---
+
 ### <solar-filters-bold-duotone/> Creating a custom UFM Filter
 
 ````md magic-move[My.UmbracoBackofficeExtensions\Client\src\manifests.ts]
@@ -586,6 +683,22 @@ export const manifests: Array<UmbExtensionManifest> = [
 
 [Extension types - Umbraco Docs](https://docs.umbraco.com/umbraco-cms/customizing/extending-overview/extension-types){v-click="[2,3]"}
 <code v-click="[6,7]">\{umbValue:dateProperty | dateFormat \}</code>
+
+<!--
+This starter gives us a `manifests.ts` file where we can register our extensions.
+
+- [Click] Let's create a custom UFM filter.
+- [Click] Specify the type from the list of options on the docs, `ufmFilter`
+- [Click] Give *the extension* a unique alias
+- [Click] and a name
+- [Click] tell it what code to run
+- [Click] and give *the filter* an alias for use in the markdown
+  - `dateFormat` here is the keyword to the right of the pipe
+
+[Click]
+So what does the code look like?
+-->
+
 ---
 layout: default
 ---
@@ -676,6 +789,19 @@ export { UmbUfmDateFormatFilterApi as api };
 ```
 ````
 
+<!--
+
+
+- [Click] create a TS class extending UmbFilterBase
+- [Click] with a `filter` function taking the value as a parameter, where we can transform the value
+- [Click] we also want our filter to accept a parameter for the format string, so we add that
+- [Click] then implement our date-formatting logic
+- [Click] allowing multiple different formats of date
+- [Click] adding TS type descriptors and some validation
+
+Which allows us to...
+-->
+
 ---
 layout: center
 ---
@@ -686,11 +812,46 @@ layout: center
 
 ![](/images/block-date-filter.png)
 
+<!--
+
+Which allows us to... render templates like this 
+
+Perhaps:
+- I have a block that allows me to filter articles newer than a picked date
+- I can then format the picked date as human-readable
+
+-->
+
 ---
 
 ![](/images/blocks-basic-templates.png)
 ![](/images/blocks-component-mockup.png)
 
+<!--
+
+Might have noticed the word `[HIDDEN]` in all these templates.
+
+Concept taken from Clean
+
+Wouldn't it be nice if we could make this feel more like a part of the UI with little tags?
+
+(Mockup in Paint!)
+
+-->
+
+---
+layout: intro
+---
+
+# <solar-circle-top-up-bold-duotone /><br />Creating a custom UFM Component
+
+
+<!--
+And to do that we're going to need a UFM Component.
+UFM filters can't return HTML.
+
+But also we've made a UFM filter so its only right we make a UFM Component too!
+ -->
 
 ---
 layout: default
@@ -711,7 +872,7 @@ export const manifests: Array<UmbExtensionManifest> = [
   }
 ];
 ```
-```ts{11-19|15}
+```ts{11-19|17|15}
 export const manifests: Array<UmbExtensionManifest> = [
   {
     type: 'ufmFilter',
@@ -734,6 +895,18 @@ export const manifests: Array<UmbExtensionManifest> = [
 ];
 ```
 ````
+
+<code v-click="[2,3]">\{tag: booleanProperty \}</code>
+
+<!--
+Here's our manifests file again.
+
+[Click] and now we're adding a new manifest for a ufmComponent, everything here looks very similar
+
+[Click] it's got an alias of `tag`
+
+[Click] and this custom code looks like...
+-->
 
 ---
 layout: default
@@ -784,6 +957,24 @@ export class TagUfmComponentApi extends UmbUfmComponentBase {
 //...
 ```
 ````
+
+<!--
+...this!
+
+- [Click] New TS class extending `UmbUfmComponentBase`
+- [Click] with a `render` function that takes the Markdown token and returns some HTML.
+- [Click] `UmbUfmComponentBase` gives us the `getAttributes` function which
+  - parses the markdown token
+  - turns it into HTML attributes for an element
+- [Click] return the markup for a custom web component (async!) using the attributes
+- [Click] we import the web component code, look at in a minute
+- [Click] I actually override the `getAttributes` function in this case
+  - I want my UFM Component to have additional parameters
+  - not natively supported
+
+  But what's in that custom web component code?
+-->
+
 ---
 layout: default
 ---
@@ -831,6 +1022,19 @@ export class UmbUfmLabelValueElement extends UmbUfmElementBase  {
 ```
 ````
 
+<!--
+
+- [Click] A TS class extending `UmbUfmElementBase` (for now!)
+- [Click] Some Lit and JS to expose the class as a web component, including the HTML tag name
+- [Click] Some styles
+- [Click] and a constructor [Click] which we can expand
+- [Click] observe the render context, so when values change our value updates
+- [Click] pull out the value of the referenced property from the context
+- Manipulate that value to render whatever we need it to
+
+The final class looks like this.
+
+-->
 ---
 layout: none
 ---
@@ -913,35 +1117,61 @@ declare global {
 }
 ```
 
+<!--
+- Changed my base class so I can return HTML (bug?)
+- Which means I've had to:
+  - add all the properties that were in the base class
+  - a few of my own for the custom parameters
+  - override the render method to show or hide the tag based on a value
+- observe the context to read the boolean value from the defined property
+-->
+
 ---
 
-```
+```md
 ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
 ```
 replaced with
-```
+```md
 {tag: hide:Hidden:warning:secondary}
 ```
 
 Also added
-```
+```md
 {tag: showPagination:Paginated:default:outline}
 ```
 
 ![](/images/block-tag-component.png)
 
----
-layout: cover
----
+<!--
+- Which means we can replace this `[HIDDEN]` logic with our new component:
+- `{tag}` takes 4 parameters (sorry Lee!)
+  - the boolean property alias
+  - the text to display if true
+  - the tag colour
+  - the tag style
+- I've replaced the `[HIDDEN]` logic as well as a flag that shows if we have pagination enabled for our blog posts
+-->
 
-## <solar-align-vertical-spacing-bold-duotone/> Custom block views
+---
+layout: center
+---
 
 Let's take that "Hidden" example further...
 
 ![](/images/blocks-component-mockup.png)
 
-What if we could avoid adding anything to the label template at all?
+We add the hidden logic to every block label. What if we could avoid adding anything to the label template at all?
 
+---
+layout: intro
+---
+
+# <solar-align-vertical-spacing-bold-duotone/> <br /> Custom block views
+
+<!--
+Custom block views have changed with recent versions too, so let's take a look at how we might do this.
+-->
 ---
 
 ## <solar-align-vertical-spacing-bold-duotone/> Custom block views
@@ -961,7 +1191,7 @@ export const manifests: Array<UmbExtensionManifest> = [
   }
 ];
 ```
-```ts{12-18|16}
+```ts{12-18|13|17|16}
 export const manifests: Array<UmbExtensionManifest> = [
   // ...
   {
@@ -983,6 +1213,15 @@ export const manifests: Array<UmbExtensionManifest> = [
 ];
 ```
 ````
+
+<!--
+We're back in our manifests file
+
+- [Click] adding a new manifest
+- [Click] of type `blockEditorCustomView`
+- [Click] specifying which block editor we're replacing the view for
+- [Click] and referencing a TS file
+-->
 
 ---
 layout: none
@@ -1079,11 +1318,28 @@ declare global {
 	}
 }
 ```
+
+<!--
+- We're extending the `UmbElementMixin` and implementing `UmbBlockEditorCustomViewElement`.
+- `UmbRefListBlockElement` is not exposed to extend it, so we have to copy a lot of it in to replace it (feature request?)
+- List of peroperties (copied)
+- a render method (mostly copied)
+- added logic for hidden blocks
+- copied styles
+- added styles for hidden blocks
+-->
+
 ---
 layout: image
 image: /images/block-custom-view-with-template.png
 backgroundSize: contain
 ---
+
+<!-- 
+Which now renders this!
+
+We can remove the original label template logic...
+-->
 
 ---
 layout: image
@@ -1091,6 +1347,20 @@ image: /images/block-custom-view-no-template.png
 backgroundSize: contain
 ---
 
+<!--
+- But the hidden tags from the view still show
+- along with the other changes I made:
+  - being faded out
+  - icon changed to a dotted square
+-->
+
+---
+layout: intro
+---
+
+# <solar-notification-unread-bold-duotone/> <br /> Custom entity signs
+
+<!-- Finally we have a brand new feature for 17, Custom entity signs! -->
 
 ---
 
@@ -1101,11 +1371,15 @@ Allows for custom signs on entities, just like the "pending changes" sign
 
 ![](/images/unpublished-changes-sign.png)
 
+<!--
+You might recognise "entity signs" from the "pending changes" sign in older versions of Umbraco.
+
+Now we can add our own!
+-->
+
 ---
 
 ## <solar-notification-unread-bold-duotone/> Custom entity signs
-
-<!-- You might have seen code like this, that blocks certain types from being deleted -->
 
 ```csharp[My.UmbracoBackofficeExtensions\Notifications\LockedDocumentContentMovingToRecycleBinNotificationHandler.cs ~i-vscode-icons:file-type-csharp~]
 /// A common use case: prevent certain document types being deleted
@@ -1132,6 +1406,14 @@ public class LockedDocumentContentMovingToRecycleBinNotificationHandler : INotif
 }
 ```
 
+<!-- 
+
+- You might have seen code like this, that blocks certain document types from being deleted
+- Nice to show this in the backoffice before trying to delete an item
+
+ -->
+
+
 ---
 
 ## <solar-notification-unread-bold-duotone/> Custom entity signs
@@ -1146,7 +1428,7 @@ export const manifests: Array<UmbExtensionManifest> = [
   }
 ];
 ```
-```ts{9-23|10-11|12-13|14|16|17-21|15}
+```ts{9-23|10-11|12-13|14|16|17-21|15|9-23}
 import { UMB_DOCUMENT_ENTITY_TYPE } from '@umbraco-cms/backoffice/document';
 
 export const manifests: Array<UmbExtensionManifest> = [
@@ -1173,10 +1455,22 @@ export const manifests: Array<UmbExtensionManifest> = [
 ```
 ````
 
+<!--
+- Back in the manifests file
+- [Click] Adding a new manifest [Click] of type `enitiySign` and kind `icon`
+- [Click] Giving it a name and alias
+- [Click] Specifying which enties can show this sign, documents
+- [Click] Can only show 2 icons at once, so the weighting matters. `-1000` means this one is really unimportant!
+- [Click] Specifying what the sign looks like
+- [Click] Finally we specify what entities should be "flagged" with to make the sign show
+- [Click] You'll notice we don't link to a TS file!
+- No JS, just C# for the first time in this presentation! 🤯
+-->
+
 ---
 
 ````md magic-move[My.UmbracoBackofficeExtensions\LockedDocumentFlagProvider.cs ~i-vscode-icons:file-type-csharp~]
-```csharp{*|3|4-7|9-19|21-24}
+```csharp{*|1|3|4-7|9-19|21-24}
 public class LockedDocumentFlagProvider : IFlagProvider
 {
     private const string Alias = Constants.Conventions.Flags.Prefix + "My.Locked";
@@ -1230,12 +1524,30 @@ public class LockedDocumentFlagProvider : IFlagProvider
 }
 ```
 ````
+
+<!--
+- [Click] Created a C# class that implements `IFlagProvider`
+- Also have to register this in a composer
+- [Click] Created an alias for out flag (as in the manifest)
+- [Click] Specified which entity types can be flagged - documents in our case
+- [Click] Then implemented the `PopulateFlags` method
+- Just looping through each item and checking it in the `ShouldAddFlag` method.
+- [Click] Lets look at the `ShouldAddFlag` method
+- [Click] We just get the ID of the document type
+- [Click] and check it against our list of IDs we don't allow being deleted
+-->
+
 ---
 layout: image
 image: /images/locked-signs.png
 backgroundSize: contain
 ---
 
+<!--
+- Can see Home and Error are locked
+- Features and Error have unpublished changes
+- Error has both, sorted by priority
+-->
 
 ---
 layout: icons-header
@@ -1254,6 +1566,10 @@ layout: icons-header
 - <solar-align-vertical-spacing-bold-duotone/> Custom block views
 - <solar-notification-unread-bold-duotone/> Custom entity signs
 
+<!--
+Now we can add all these tools to our backoffice-customisation toolkit!
+-->
+
 ---
 layout: icons-header
 ---
@@ -1269,6 +1585,10 @@ layout: icons-header
 - <solar-server-minimalistic-bold-duotone/> List views
 - <solar-test-tube-minimalistic-bold-duotone/> User testing & feedback loops
 
+<!--
+- Along with the tools we already have
+- largely unchanged in recent versions.
+-->
 
 ---
 layout: bio
@@ -1285,5 +1605,4 @@ name: Thank you
 - <solar-global-bold-duotone /> https://joe.gl/ombek
 - <solar-presentation-graph-bold-duotone /> https://slides.joe.gl/template-for-success
 - <solar-chat-square-code-bold-duotone/> https://notacu.lt/slides/template/samples
-
----
+-  🔜 [24days.in/umbraco-cms](https://24days.in/umbraco-cms/2025/template-for-success/) <!--<solar-calendar-bold-duotone/>-->
