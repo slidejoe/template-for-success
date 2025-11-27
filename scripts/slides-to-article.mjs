@@ -24,7 +24,7 @@ function extractFrontMatter(text) {
 
 function normalizeCodeFences(slideContent) {
   // Replace opening fences like ```ts{monaco} or ```md magic-move[...] with ```ts or ```md
-  return slideContent.replace(/(^```)([^\n\r]*)/gm, (_, fence, rest) => {
+  return slideContent.replace(/^(^```)([^`\n\r]*)$/gm, (_, fence, rest) => {
     const langMatch = (rest || "").trim().match(/^([a-zA-Z0-9+#-]+)/);
     if (langMatch) return fence + langMatch[1];
     return fence;
@@ -37,9 +37,9 @@ function stripSlidevMarkers(slideContent) {
 }
 
 function prepareNote(note) {
-  if (!note) return;
+  if (!note) return '';
   // [Click] removed
-  return note.replace(/\[Click\]/gi, "");
+  return `\n${note.replace(/\[Click\]/gi, "")}\n`;
 }
 
 function removeStyleTags(slideContent) {
@@ -48,7 +48,7 @@ function removeStyleTags(slideContent) {
 
 function stripHtmlTagsKeepText(slideContent) {
   // keep inner text, remove tags; remove self-closing tags (like <img/>) entirely
-  return slideContent.replace(/<\/?[^>]+>/g, "");
+  return slideContent.replace(/<\/?[^<>]+>/g, "");
 }
 
 function removeDuplicateHeadings(slideContent, seen) {
@@ -82,21 +82,19 @@ async function run() {
   const outSlides = [];
   const seenHeadings = new Set();
   for (let s of slidev.slides) {
-    console.log(JSON.stringify(s));
     // if the slide contains layout: bio (either parsed frontmatter or inline), skip
     if (s.frontmatter.layout == "bio") continue;
 
-    if (!s || !s.contentRaw || !s.contentRaw.trim()) continue;
+    if (!s || !s.raw || !s.raw.trim()) continue;
 
-    var slideContent = s.contentRaw;
+    var articleContent = "";
 
     if (s.frontmatter.image) {
-      slideContent = `![](${s.frontmatter.image})` + slideContent;
+      articleContent += `![](${s.frontmatter.image})`;
     }
 
-    // remove [Click]
-    slideContent += prepareNote(s.note);
-
+if(s.contentRaw) {
+   var slideContent = s.contentRaw;
     // remove Slidev markers
     slideContent = stripSlidevMarkers(slideContent);
 
@@ -113,7 +111,14 @@ async function run() {
     slideContent = normalizeCodeFences(slideContent);
 
     slideContent = slideContent.trim();
-    if (slideContent) outSlides.push(slideContent);
+
+    articleContent += slideContent;
+  }
+
+    // Add notes and remove [Click]
+    articleContent += prepareNote(s.note);
+
+    if (articleContent) outSlides.push(articleContent);
   }
 
   // build article

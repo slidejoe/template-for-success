@@ -1,4 +1,4 @@
-Rich Text: ${ content.markup | stripHtml } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
+Rich Text: ${ content | stripHtml } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
 Image: ${ caption } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
 Video: ${ caption != '' ? caption : videoUrl } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }
 Code Snippet: ${ title } ${ $settings.hide == '1' ? '[HIDDEN]' : '' }

@@ -19,6 +19,7 @@ mdc: true
 duration: 30min
 addons:
   - slidev-addon-demotime
+monacoRunUseStrict: false
 ---
 <style>
 .slidev-vclick-hidden {
@@ -349,7 +350,7 @@ We used to be able to achieve this using [AngularJS templates](https://joe.gl/om
 
 `Call to Action: {{ page | ncNodeName }}`
 
-`Text module: {{ bodyText.markup | ncRichText | truncate:true:35 }}`
+`Text module: {{ bodyText | ncRichText | truncate:true:35 }}`
 
 <!--
 We used to be able customise this by providing label templates for our blocks using AngularJS templates
@@ -362,7 +363,7 @@ Rendering the name of a page using the `ncNodeName` filter
 
 Or strip markup from an RTE, and truncate it to fit the label.
 
-But with the removal of AngularJS, came the removal of AngualarJS templates...
+But with the removal of AngularJS, came the removal of AngularJS templates...
 -->
 
 ---
@@ -565,9 +566,10 @@ And it's geared up for packages and less for one-off tweaks to individual sites
 
 ### <solar-box-bold-duotone/> Creating an extension
 
-<v-clicks every="3">
+<v-clicks every="4">
 
 - [Vite Package Setup - Umbraco Docs](https://docs.umbraco.com/umbraco-cms/customizing/development-flow/vite-package-setup)
+- [Umbraco Extension Template - Umbraco Docs](https://docs.umbraco.com/umbraco-cms/customizing/development-flow/umbraco-extension-template)
 - [Lotte's Opinionated Umbraco Package Starter Template](https://github.com/LottePitcher/opinionated-package-starter)
 - Vanilla JS ([No, you don’t need Lit, Vite, or TypeScript to Extend the Umbraco Backoffice - Luuk Peters](https://dev.to/luukpeters/no-you-dont-need-lit-vite-or-typescript-to-extend-the-umbraco-backoffice-2mg6))
 - [Bump's Umbraco Backoffice Extension Starter](https://github.com/bumpdigital/umbraco-backoffice-extension-starter)
@@ -580,14 +582,19 @@ Several options for starting out creating an extension
 [Click]
 
 - Umbraco docs guide to creating a Vite-based package
+- The Umbraco Extension Template
 - Lotte's opinionated starter template
 - Vanilla JS, as highlighted by Luuk Peters
 
 But these didn't suit us at Bump.
 
-The docs guide involved a lot of steps and deleting sample code, we wanted something quicker!
+The docs Vite guide involved a lot of steps and deleting sample code, we wanted something quicker!
 
-Lotte's template is fantastic for creating versioned, distributed packages but is overkill for our use case
+The official extension dotnet template is almost what I want!
+But creates a lot of files we rarely need.
+
+Lotte's template uses the dotnet template under the covers
+adding features fantastic for creating versioned, distributed packages but is overkill for our use case
 
 Although Vanilla JS is simple and works really well for smaller extensions, I prefer the full TypeScript, Lit and Vite setup so its easier to add larger extensions to a project without a second bottleneck.
 
@@ -801,6 +808,7 @@ The final class looks like this.
 ---
 layout: none
 ---
+
 <style>
   div:has(> .slidev-monaco-container),
   .slidev-monaco-container {
@@ -812,7 +820,6 @@ layout: none
 </style>
 
 <<< @/snippets/creating-a-custom-ufm-component-full.ts ts{monaco}
-
 
 <!--
 - Changed my base class so I can return HTML (bug?)
