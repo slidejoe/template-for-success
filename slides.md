@@ -903,7 +903,7 @@ layout: none
 <!--
 - We're extending the `UmbElementMixin` and implementing `UmbBlockEditorCustomViewElement`.
 - `UmbRefListBlockElement` is not exposed to extend it, so we have to copy a lot of it in to replace it (feature request?)
-- List of peroperties (copied)
+- List of properties (copied)
 - a render method (mostly copied)
 - added logic for hidden blocks
 - copied styles
@@ -1083,5 +1083,5 @@ name: Thank you
 <br/>
 
 - <solar-global-bold-duotone /> https://joe.gl/ombek
-- <solar-link-square-bold-duotone/> https://joe.gl/ombek/links/template-for-success
+- <solar-link-square-bold-duotone/> https://joe.gl/ombek/links/t4s
 -  🔜 [24days.in/umbraco-cms](https://24days.in/umbraco-cms/2025/template-for-success/) <!--<solar-calendar-bold-duotone/>-->
