@@ -1008,7 +1008,7 @@ Now we can add our own!
 <!--
 - [Click] Created a C# class that implements `IFlagProvider`
 - Also have to register this in a composer
-- [Click] Created an alias for out flag (as in the manifest)
+- [Click] Created an alias for our flag (as in the manifest)
 - [Click] Specified which entity types can be flagged - documents in our case
 - [Click] Then implemented the `PopulateFlags` method
 - Just looping through each item and checking it in the `ShouldAddFlag` method.
