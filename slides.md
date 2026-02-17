@@ -1083,5 +1083,5 @@ name: Thank you
 <br/>
 
 - <solar-global-bold-duotone /> https://joe.gl/ombek
-- <solar-link-square-bold-duotone/> https://joe.gl/ombek/links/t4s
--  🔜 [24days.in/umbraco-cms](https://24days.in/umbraco-cms/2025/template-for-success/) <!--<solar-calendar-bold-duotone/>-->
+- <solar-link-square-bold-duotone/> Articles & links: https://go.joe.gl/t4s
+<!-- - <solar-calendar-bold-duotone/> [24days.in/umbraco-cms](https://24days.in/umbraco-cms/2025/template-for-success/) -->
